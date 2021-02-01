@@ -15,8 +15,8 @@ after_success:
 notifications:
   email:
     recipients:
-      - s-krasssavin@mail.ru
-    on_success: never # default: change
+      -s-krasssavin@mail.ru
+    on_success: never # default: changes
     on_failure: always # defa,ult: always
 
 env:
