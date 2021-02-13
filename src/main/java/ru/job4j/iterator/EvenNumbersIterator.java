@@ -20,11 +20,7 @@ public class EvenNumbersIterator implements Iterator<Integer> {
 
     @Override
     public boolean hasNext() {
-        System.out.println("point: " + point);
-        if (point == data.length - 1 && data[point] % 2 != 0) {
-            return false;
-        }
-        while (data[point] % 2 != 0) {
+        while (point < data.length && data[point] % 2 != 0) {
             point++;
         }
         return point < data.length;
@@ -35,7 +31,6 @@ public class EvenNumbersIterator implements Iterator<Integer> {
         if (!hasNext()) {
             throw new NoSuchElementException();
         }
-
         return data[point++];
     }
 }
