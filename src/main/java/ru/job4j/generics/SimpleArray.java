@@ -2,11 +2,12 @@ package ru.job4j.generics;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+import java.util.Objects;
 
 public class SimpleArray<T> implements Iterable<T>{
-    Object[] list;
-    int cursor;
-    private Object IndexOutOfBoundsException;
+    private Object[] list;
+    private int cursor;
+    private int current;
 
     public SimpleArray(int length) {
         list = new Object[length];
@@ -14,19 +15,14 @@ public class SimpleArray<T> implements Iterable<T>{
 
     //добавляет указанный элемент (model) в первую свободную ячейку;
     public void add(T model) {
-        for(int x = 0; x < list.length; x++) {
-            if (list[x] == null) {
-                list[x] = model;
-                break;
-            }
-        }
+        list[cursor++] = model;
     }
 
     // заменяет указанным элементом (model) элемент, находящийся по индексу index;
     public void set(int index, T model) {
-        if (index >= 0 || index < list.length - 1) {
-            list[index] = model;
-        }
+        Objects.checkIndex(index, cursor);
+        list[index] = model;
+
     }
 
     //удаляет элемент по указанному индексу, все находящиеся справа элементы
@@ -37,9 +33,8 @@ public class SimpleArray<T> implements Iterable<T>{
 
     //возвращает элемент, расположенный по указанному индексу;
     public T get(int index) {
-        if (index >= 0 || index < list.length - 1) {
-            return (T) list[index];
-        }else return (T) IndexOutOfBoundsException;
+        Objects.checkIndex(index, cursor);
+        return (T) list[index];
     }
 
 
@@ -49,7 +44,7 @@ public class SimpleArray<T> implements Iterable<T>{
 
             @Override
             public boolean hasNext() {
-                return cursor < list.length;
+                return current < list.length;
             }
 
             @Override
@@ -57,7 +52,7 @@ public class SimpleArray<T> implements Iterable<T>{
                 if (!hasNext()) {
                     throw new NoSuchElementException();
                 }
-                return (T) list[cursor++];
+                return (T) list[current++];
             }
         };
     }
@@ -73,11 +68,10 @@ public class SimpleArray<T> implements Iterable<T>{
         
         System.out.println(a.iterator().next());
         System.out.println(a.iterator().next());
-        System.out.println(a.iterator().next());
 
 
-        for (int x = 0; x < a.list.length; x++) {
-            System.out.println(x + " : " + a.get(10));
+        for (int x = 0; x < a.cursor; x++) {
+            System.out.println(x + " : " + a.get(x));
         }
     }
 
