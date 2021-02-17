@@ -29,6 +29,7 @@ public class SimpleArray<T> implements Iterable<T>{
     //при этом необходимо сдвинуть на единицу влево (в середине массива не должно быть пустых ячеек);
     public void remove(int index) {
         System.arraycopy(list, index + 1, list, index, list.length - (index+1));
+        cursor--;
     }
 
     //возвращает элемент, расположенный по указанному индексу;
@@ -64,8 +65,9 @@ public class SimpleArray<T> implements Iterable<T>{
         a.add(new Tiger());
         a.add(new Animal());
         a.add(new Tiger());
+        a.add(new Tiger());
         a.remove(2);
-        
+
         System.out.println(a.iterator().next());
         System.out.println(a.iterator().next());
 
