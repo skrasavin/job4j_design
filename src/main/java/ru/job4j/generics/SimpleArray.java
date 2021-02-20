@@ -7,7 +7,6 @@ import java.util.Objects;
 public class SimpleArray<T> implements Iterable<T>{
     private Object[] list;
     private int cursor;
-    private int current;
 
     public SimpleArray(int length) {
         list = new Object[length];
@@ -41,11 +40,13 @@ public class SimpleArray<T> implements Iterable<T>{
 
     @Override
     public Iterator<T> iterator() {
-        return new Iterator<T>() {
 
+        return new Iterator<T>() {
+            private int current;
             @Override
+
             public boolean hasNext() {
-                return current < list.length;
+                return current < cursor;
             }
 
             @Override
@@ -70,11 +71,12 @@ public class SimpleArray<T> implements Iterable<T>{
 
         System.out.println(a.iterator().next());
         System.out.println(a.iterator().next());
+        System.out.println(a.iterator().next());
 
 
-        for (int x = 0; x < a.cursor; x++) {
-            System.out.println(x + " : " + a.get(x));
-        }
+//        for (int x = 0; x < a.cursor; x++) {
+//            System.out.println(x + " : " + a.get(x));
+//        }
     }
 
 }
