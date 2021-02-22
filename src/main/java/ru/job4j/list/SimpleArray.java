@@ -3,18 +3,23 @@ package ru.job4j.list;
 import java.util.*;
 
 public class SimpleArray<T> implements Iterable<T> {
-    Object[] container = new Object[0];
-    int modCount;
-    int size;
+    private Object[] container = new Object[0];
+    private int modCount;
+    private int size;
+
+    public void enlargeContainer() {
+        container = Arrays.copyOf(container, size * 2);
+    }
 
     public void add(T model) {
         if (container.length == 0) {
             container = new Object[1];
         }else {
-            container = Arrays.copyOf(container, size+1);
+            enlargeContainer();
         }
         container[size] = model;
         size++;
+        modCount++;
     }
 
     public T get(int index) {

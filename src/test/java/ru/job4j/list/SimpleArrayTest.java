@@ -28,7 +28,6 @@ public class SimpleArrayTest {
     public void whenAddThenGet() {
         SimpleArray<String> array = new SimpleArray<>();
         array.add("first");
-        System.out.println(array.size);
         String rsl = array.get(0);
         System.out.println(rsl);
         assertThat(rsl, is("first"));
