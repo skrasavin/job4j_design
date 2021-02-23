@@ -14,7 +14,8 @@ public class SimpleArray<T> implements Iterable<T> {
     public void add(T model) {
         if (container.length == 0) {
             container = new Object[1];
-        } else {
+        }
+        if (size == container.length){
             enlargeContainer();
         }
         container[size] = model;
