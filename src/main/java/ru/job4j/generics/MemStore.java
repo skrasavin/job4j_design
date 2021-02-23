@@ -3,7 +3,7 @@ package ru.job4j.generics;
 import java.util.ArrayList;
 import java.util.List;
 
-public final class MemStore<T extends Base> implements Store<T> {
+public final class  MemStore<T extends Base> implements Store<T> {
 
     private final List<T> mem = new ArrayList<>();
 
@@ -14,8 +14,9 @@ public final class MemStore<T extends Base> implements Store<T> {
 
     @Override
     public boolean replace(String id, T model) {
-        if (findById(id) != null) {
-            this.mem.set(findIndexById(id), model);
+        int var = findIndexById(id);
+        if (var != -1) {
+            this.mem.set(var, model);
             return true;
         }
         return false;
@@ -23,10 +24,12 @@ public final class MemStore<T extends Base> implements Store<T> {
 
     @Override
     public boolean delete(String id) {
-        if (findById(id) == null) {
+        int var = findIndexById(id);
+        if (var == -1) {
             return false;
         }
-        return this.mem.remove(findById(id));
+        this.mem.remove(var);
+        return true;
     }
 
     @Override
@@ -40,9 +43,9 @@ public final class MemStore<T extends Base> implements Store<T> {
     }
 
     public int findIndexById(String id) {
-        for (T item : mem) {
-            if (item.getId() == id) {
-                return mem.indexOf(item.getId());
+        for (int x = 0; x < mem.size(); x++) {
+            if (mem.get(x).getId().equals(id)) {
+                return x;
             }
         }
         return -1;
