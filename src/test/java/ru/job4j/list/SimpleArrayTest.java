@@ -18,9 +18,8 @@ public class SimpleArrayTest {
         array.add("first");
         array.add("second");
         array.add("fifth");
-        Object rsl = array.remove(1);
+        array.remove(1);
         Object rsl1 = array.get(1);
-        assertThat(rsl, is("second"));
         assertThat(rsl1, is("fifth"));
     }
 

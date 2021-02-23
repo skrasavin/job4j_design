@@ -34,16 +34,11 @@ public class SimpleArray<T> implements Iterable<T> {
         modCount++;
     }
 
-    public T  remove(int index) {
+    public void remove(int index) {
         Objects.checkIndex(index, size);
-        Object var = container[index];
-        for (int x = index; x < container.length - 1; x++) {
-            container[x] = container[x+1];
-        }
-        container = Arrays.copyOf(container, size);
+        System.arraycopy(container, index + 1, container, index, container.length - (index+1));
         size--;
         modCount++;
-        return (T) var;
     }
 
     @Override
