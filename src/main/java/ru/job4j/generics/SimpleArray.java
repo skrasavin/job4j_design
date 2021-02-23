@@ -27,6 +27,7 @@ public class SimpleArray<T> implements Iterable<T>{
     //удаляет элемент по указанному индексу, все находящиеся справа элементы
     //при этом необходимо сдвинуть на единицу влево (в середине массива не должно быть пустых ячеек);
     public void remove(int index) {
+        Objects.checkIndex(index, cursor);
         System.arraycopy(list, index + 1, list, index, list.length - (index+1));
         cursor--;
     }
