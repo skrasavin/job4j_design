@@ -14,7 +14,7 @@ public class SimpleArray<T> implements Iterable<T> {
     public void add(T model) {
         if (container.length == 0) {
             container = new Object[1];
-        }else {
+        } else {
             enlargeContainer();
         }
         container[size] = model;
@@ -36,7 +36,8 @@ public class SimpleArray<T> implements Iterable<T> {
 
     public void remove(int index) {
         Objects.checkIndex(index, size);
-        System.arraycopy(container, index + 1, container, index, container.length - (index+1));
+        System.arraycopy(container, index + 1,
+                container, index, container.length - (index + 1));
         size--;
         modCount++;
     }

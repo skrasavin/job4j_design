@@ -4,7 +4,7 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.Objects;
 
-public class SimpleArray<T> implements Iterable<T>{
+public class SimpleArray<T> implements Iterable<T> {
     private Object[] list;
     private int cursor;
 
@@ -28,7 +28,8 @@ public class SimpleArray<T> implements Iterable<T>{
     //при этом необходимо сдвинуть на единицу влево (в середине массива не должно быть пустых ячеек);
     public void remove(int index) {
         Objects.checkIndex(index, cursor);
-        System.arraycopy(list, index + 1, list, index, list.length - (index+1));
+        System.arraycopy(list, index + 1, list,
+                index, list.length - (index + 1));
         cursor--;
     }
 

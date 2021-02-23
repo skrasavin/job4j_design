@@ -7,10 +7,10 @@ import java.util.List;
 class Animal {
 }
 
-class Predator extends Animal{
+class Predator extends Animal {
 }
 
-class Tiger extends Predator{
+class Tiger extends Predator {
 }
 
 
