@@ -54,7 +54,13 @@ public class LinkedArray<T> implements Iterable {
                 if (expectedModCount != modCount) {
                     throw new ConcurrentModificationException();
                 }
-                return get(current++);
+                Node a = firstNode;
+                current++;
+                for (int x = 0; x != current; x++) {
+                    a = a.getNextElement();
+                }
+                return (T) a.getCurrentElement();
+
             }
         };
     }
