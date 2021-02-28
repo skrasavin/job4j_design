@@ -8,14 +8,13 @@ public class ForwardLinked<T> implements Iterable<T>{
     private Node<T> head;
 
     public T deleteFirst() {
-        if (head != null) {
-            Node next = head.next;
-            Node base = head;
-            head.next = null;
-            head = next;
-            return (T) base.value;
+        if (head == null) {
+            throw new NoSuchElementException("Список пуст");
         }
-        throw new NoSuchElementException("Список пуст");
+        T value = head.value;
+        head = head.next;
+        return (T) value;
+
     }
 
     public void add(T value) {
