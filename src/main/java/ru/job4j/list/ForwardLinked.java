@@ -6,6 +6,11 @@ import java.util.Queue;
 
 public class ForwardLinked<T> implements Iterable<T>{
     private Node<T> head;
+    private int size;
+
+    public int getSize() {
+        return size;
+    }
 
     public T deleteFirst() {
         if (head == null) {
@@ -13,12 +18,28 @@ public class ForwardLinked<T> implements Iterable<T>{
         }
         T value = head.value;
         head = head.next;
-        return (T) value;
+        size--;
+        return value;
 
     }
 
+    public T deleteLast() {
+        if (head == null) {
+            throw new NoSuchElementException("Список пуст");
+        }
+        Node<T> tail = head;
+        while (tail.next.next != null) {
+            tail = tail.next;
+        }
+        T value = tail.next.value;
+        tail.next = null;
+        size--;
+        return value;
+    }
+
     public void add(T value) {
-        Node<T> node = new Node<T>(value, null);
+        size++;
+        Node<T> node = new Node<>(value, null);
         if (head == null) {
             head = node;
             return;
@@ -32,7 +53,7 @@ public class ForwardLinked<T> implements Iterable<T>{
 
     @Override
     public Iterator<T> iterator() {
-        return new Iterator<T>() {
+        return new Iterator<>() {
             Node<T> node = head;
 
             @Override
