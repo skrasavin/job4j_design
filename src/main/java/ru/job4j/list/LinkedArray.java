@@ -40,7 +40,7 @@ public class LinkedArray<T> implements Iterable {
         return new Iterator<T>() {
             private int current;
             int expectedModCount = modCount;
-            Node<T> node = firstNode;
+            Node<T> node = firstNode.next;
 
             @Override
             public boolean hasNext() {
@@ -55,7 +55,8 @@ public class LinkedArray<T> implements Iterable {
                 if (expectedModCount != modCount) {
                     throw new ConcurrentModificationException();
                 }
-                T value = (T) node.next.getCurrentElement();
+                current++;
+                T value = (T) node.getCurrentElement();
                 node = node.next;
                 return value;
 
