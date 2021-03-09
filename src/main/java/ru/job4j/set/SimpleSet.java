@@ -1,6 +1,8 @@
 package ru.job4j.set;
 
 import ru.job4j.list.SimpleArray;
+
+import java.awt.*;
 import java.util.*;
 
 public class SimpleSet<E> implements Iterable<E>{
@@ -8,22 +10,13 @@ public class SimpleSet<E> implements Iterable<E>{
 
     public boolean add(E e) {
         for (int x = 0; x != container.getSize(); x++) {
-            if (e.equals(container.get(x))) {
+            if (Objects.equals(e, container.get(x))) {
                 return false;
             }
         }
         this.container.add(e);
         return true;
     }
-//
-//    public boolean checkSame(E e) {
-//        for (int x = 0; x != container.getSize(); x++) {
-//            if (e.equals(container.get(x))) {
-//                return false;
-//            }
-//        }
-//        return true;
-//    }
 
     @Override
     public Iterator<E> iterator() {
