@@ -18,6 +18,18 @@ public class User {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        User user = (User) o;
+        return age == user.age && Objects.equals(name, user.name) && Objects.equals(birthday, user.birthday);
+    }
+
+    @Override
     public int hashCode() {
         return this.name.charAt(0);
     }
@@ -32,8 +44,6 @@ public class User {
             System.out.println("ok");
         }
         users.entrySet().forEach(System.out::println);
-        users.entrySet().forEach(a -> System.out.println(a.hashCode()));
-        users.keySet().forEach(a -> System.out.println(a.hashCode()));
 
     }
 }
