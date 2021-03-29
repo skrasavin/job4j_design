@@ -52,5 +52,4 @@ public class ListUtilsTest {
         ListUtils.removeAll(input, listCompare);
         assertThat(Collections.singletonList(2), Is.is(input));
     }
-
 }

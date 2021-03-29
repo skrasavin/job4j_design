@@ -15,7 +15,7 @@ public class SimpleArray<T> implements Iterable<T> {
         if (container.length == 0) {
             container = new Object[1];
         }
-        if (size == container.length){
+        if (size == container.length) {
             enlargeContainer();
         }
         container[size] = model;
@@ -28,6 +28,9 @@ public class SimpleArray<T> implements Iterable<T> {
         return (T) container[index];
     }
 
+    public int getSize() {
+        return size;
+    }
 
     public void replace(int index, T model) {
         Objects.checkIndex(index, size);
@@ -46,7 +49,7 @@ public class SimpleArray<T> implements Iterable<T> {
     @Override
     public Iterator<T> iterator() {
 
-        return new Iterator<T>() {
+        return new Iterator<>() {
             int expectedModCount = modCount;
             private int current;
 

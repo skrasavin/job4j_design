@@ -4,7 +4,7 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.Queue;
 
-public class ForwardLinked<T> implements Iterable<T>{
+public class ForwardLinked<T> implements Iterable<T> {
     private Node<T> head;
     private int size;
 

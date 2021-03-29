@@ -43,7 +43,7 @@ public class User {
             users.put(second, new Object());
             System.out.println("ok");
         }
-        users.entrySet().forEach(System.out::println);
+         users.entrySet().forEach(System.out::println);
 
     }
 }

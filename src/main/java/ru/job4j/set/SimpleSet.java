@@ -5,7 +5,7 @@ import ru.job4j.list.SimpleArray;
 import java.awt.*;
 import java.util.*;
 
-public class SimpleSet<E> implements Iterable<E>{
+public class SimpleSet<E> implements Iterable<E> {
     private SimpleArray<E> container = new SimpleArray<>();
 
     public boolean add(E e) {

@@ -20,7 +20,7 @@ public class LinkedArray<T> implements Iterable {
     public void add(T model) {
         Node<T> prev = lastNode;
         prev.setCurrentElement(model);
-        lastNode = new Node<T>(null, prev, null);
+        lastNode = new Node<>(null, prev, null);
         prev.setNextElement(lastNode);
         modCount++;
         size++;
@@ -28,7 +28,7 @@ public class LinkedArray<T> implements Iterable {
 
     public T get(int index) {
         Node<T> target = firstNode.getNextElement();
-        for(int x = 0; x < index; x++) {
+        for (int x = 0; x < index; x++) {
                target = target.getNextElement();
         }
         return target.getCurrentElement();
@@ -37,7 +37,7 @@ public class LinkedArray<T> implements Iterable {
     @Override
     public Iterator<T> iterator() {
 
-        return new Iterator<T>() {
+        return new Iterator<>() {
             int expectedModCount = modCount;
             Node<T> node = firstNode;
 
@@ -54,7 +54,7 @@ public class LinkedArray<T> implements Iterable {
                 if (expectedModCount != modCount) {
                     throw new ConcurrentModificationException();
                 }
-                T value = (T) node.getCurrentElement();
+                T value = node.getCurrentElement();
                 node = node.next;
                 return value;
 
@@ -62,14 +62,12 @@ public class LinkedArray<T> implements Iterable {
         };
     }
 
-    private static class Node<T>
-    {
+    private static class Node<T> {
         T element;
         Node<T> next;
         Node<T> prev;
 
-        Node(T element, Node<T> prev, Node<T> next)
-        {
+        Node(T element, Node<T> prev, Node<T> next) {
             this.element = element;
             this.next = next;
             this.prev = prev;
