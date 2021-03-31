@@ -7,10 +7,12 @@ public class FileProperty {
     private long size;
 
     private String name;
+    private String absolutePath;
 
-    public FileProperty(long size, String name) {
+    public FileProperty(long size, String name, String absolutePath) {
         this.size = size;
         this.name = name;
+        this.absolutePath = absolutePath;
     }
 
     public long getSize() {
@@ -29,6 +31,9 @@ public class FileProperty {
         this.name = name;
     }
 
+    public String getAbsolutePath() {
+        return absolutePath;
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) {
