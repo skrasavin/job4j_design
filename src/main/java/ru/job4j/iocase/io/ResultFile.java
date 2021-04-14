@@ -11,8 +11,7 @@ public class ResultFile {
                 if (b == 9) {
                     str = a + "*" + b + "=" + x + '\n';
                 }
-                try (FileOutputStream out = new FileOutputStream(
-                        "/home/serg/IdeaProjects/job4j_design/iofiles/result.txt", true)) {
+                try (FileOutputStream out = new FileOutputStream("iofiles/result.txt", true)) {
                     out.write(str.getBytes());
                 } catch (Exception e) {
                     e.printStackTrace();
