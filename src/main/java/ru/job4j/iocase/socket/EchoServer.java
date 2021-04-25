@@ -17,6 +17,7 @@ public class EchoServer {
                     while (!(str = in.readLine()).isEmpty()) {
                         if (str.contains("msg") && str.split("msg=")[1].split(" ")[0]
                                 .equals("Bye")) {
+                            out.write("HTTP/1.1 200 OK\r\n\"".getBytes());
                             out.write("Сервер закончил работу\r\n".getBytes());
                             server.close();
                         }
