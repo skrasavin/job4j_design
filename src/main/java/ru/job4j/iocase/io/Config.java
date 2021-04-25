@@ -2,9 +2,8 @@ package ru.job4j.iocase.io;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.StringJoiner;
+import java.nio.file.Path;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Config {
@@ -17,6 +16,15 @@ public class Config {
 
     public void load() {
         try (BufferedReader read = new BufferedReader(new FileReader(this.path))) {
+            for (Scanner sc = new Scanner(Path.of(this.path)); sc.hasNext();) {
+                String testSc = sc.nextLine();
+                if (!testSc.contains("#")
+                        && testSc.split("=").length < 2
+                        && !testSc.isEmpty()) {
+                    throw new IllegalArgumentException();
+//                    throw new IllegalArgumentException("Проверьте правильность заполнения свойств");
+                }
+            }
             this.values = read.lines().filter(a -> a.contains("=") && a.split("=").length > 1)
                     .map(i -> i.split("="))
                     .collect(Collectors.toMap(a -> a[0], a -> a[1]));
