@@ -2,9 +2,9 @@ package ru.job4j.iocase.io;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.IOException;
 import java.nio.file.Path;
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class Config {
     private final String path;
@@ -21,14 +21,15 @@ public class Config {
                 if (!testSc.contains("#")
                         && testSc.split("=").length < 2
                         && !testSc.isEmpty()) {
-                    throw new IllegalArgumentException();
-//                    throw new IllegalArgumentException("Проверьте правильность заполнения свойств");
+                    throw new IllegalArgumentException("Проверьте правильность заполнения свойств");
+                }
+                if (testSc.contains("=") && !testSc.contains("#")) {
+                    String k = testSc.split("=")[0];
+                    String v = testSc.split("=")[1];
+                    values.put(k,v);
                 }
             }
-            this.values = read.lines().filter(a -> a.contains("=") && a.split("=").length > 1)
-                    .map(i -> i.split("="))
-                    .collect(Collectors.toMap(a -> a[0], a -> a[1]));
-        } catch (Exception e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
