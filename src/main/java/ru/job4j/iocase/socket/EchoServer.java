@@ -9,21 +9,27 @@ public class EchoServer {
         try (ServerSocket server = new ServerSocket(9000)) {
             while (!server.isClosed()) {
                 Socket socket = server.accept();
-                System.out.println(socket.getInetAddress());
                 try (OutputStream out = socket.getOutputStream();
                      BufferedReader in = new BufferedReader(
                              new InputStreamReader(socket.getInputStream()))) {
                     String str;
+                    int a = 0;
                     while (!(str = in.readLine()).isEmpty()) {
                         if (str.contains("msg") && str.split("msg=")[1].split(" ")[0]
-                                .equals("Bye")) {
-                            out.write("HTTP/1.1 200 OK\r\n\"".getBytes());
-                            out.write("Сервер закончил работу\r\n".getBytes());
+                                .equals("Exit")) {
                             server.close();
                         }
-                        System.out.println(str);
+                        if (str.contains("msg") && str.split("msg=")[1].split(" ")[0]
+                                .equals("Hello")) {
+                            out.write("HTTP/1.1 200 OK\r\n\r\n".getBytes());
+                            out.write("Hello, dear friend.".getBytes());
+                            break;
+                        }else {
+                            out.write("HTTP/1.1 200 OK\r\n\r\n".getBytes());
+                            out.write("What?".getBytes());
+                            break;
+                        }
                     }
-                    out.write("HTTP/1.1 200 OK\r\n\"".getBytes());
                 }
             }
         }
