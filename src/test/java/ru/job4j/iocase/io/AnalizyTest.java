@@ -25,30 +25,9 @@ public class AnalizyTest {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        String testOfFirstLine = "10:58:01;10:59:01";
-        String testOfLastLine = "11:01:02;11:02:02";
+        String testOfFirstLine = "10:58:01";
+        String testOfLastLine = "11:02:02";
         assertThat(first, is(testOfFirstLine));
         assertThat(last, is(testOfLastLine));
     }
-
-
-//    @Test
-//    public void whenTestFirstAndLastLines() {
-//        String first = null, last = null, line = null;
-//        new Analizy().unavailable("iofiles/server/server.log", "iofiles/server/unavailable.csv");
-//        try (BufferedReader in = new BufferedReader(new FileReader("iofiles/server/unavailable.csv"))) {
-//            first = in.readLine();
-//            while ((line = in.readLine()) != null) {
-//                if (line != null) {
-//                    last = line;
-//                }
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        String testOfFirstLine = "10:58:01;10:59:01";
-//        String testOfLastLine = "11:01:02;11:02:02";
-//        assertThat(first, is(testOfFirstLine));
-//        assertThat(last, is(testOfLastLine));
-//    }
 }
