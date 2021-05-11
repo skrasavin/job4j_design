@@ -23,12 +23,12 @@ public class Analizy {
                     }
                 }
             }
-            addToLog(target, (ArrayList) lines);
+            addToLog(target, lines);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    public static void addToLog(String target, ArrayList log) {
+    public static void addToLog(String target, List log) {
         try (PrintWriter out = new PrintWriter(new FileOutputStream(target))) {
             for (Object a : log) {
                 out.println(a);
