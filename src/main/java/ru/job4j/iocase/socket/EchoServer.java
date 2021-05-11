@@ -15,17 +15,18 @@ public class EchoServer {
                     String str;
                     int a = 0;
                     while (!(str = in.readLine()).isEmpty()) {
+                        out.write("HTTP/1.1 200 OK\r\n\r\n".getBytes());
                         if (str.contains("msg") && str.split("msg=")[1].split(" ")[0]
                                 .equals("Exit")) {
-                            server.close();
+                                out.write("Bye.".getBytes());
+                                server.close();
+                                break;
                         }
                         if (str.contains("msg") && str.split("msg=")[1].split(" ")[0]
                                 .equals("Hello")) {
-                            out.write("HTTP/1.1 200 OK\r\n\r\n".getBytes());
                             out.write("Hello, dear friend.".getBytes());
                             break;
                         }else {
-                            out.write("HTTP/1.1 200 OK\r\n\r\n".getBytes());
                             out.write("What?".getBytes());
                             break;
                         }
