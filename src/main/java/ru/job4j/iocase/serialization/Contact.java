@@ -16,7 +16,6 @@ public class Contact implements Serializable {
     public int getZipCode() {
         return zipCode;
     }
-
     public String getPhone() {
         return phone;
     }
