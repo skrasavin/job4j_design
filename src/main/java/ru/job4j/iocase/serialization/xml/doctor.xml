@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doctor name="Tim" age="22" experience="false">
+    <skills skill="surgeon"/>
+    <studies>
+        <study>Uni</study>
+        <study>Praxis</study>
+    </studies>
+</doctor>
