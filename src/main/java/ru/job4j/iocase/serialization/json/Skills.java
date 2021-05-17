@@ -1,7 +1,7 @@
 package ru.job4j.iocase.serialization.json;
 
 public class Skills {
-    private String skill;
+    private final String skill;
 
     public Skills(String skill) {
         this.skill = skill;
