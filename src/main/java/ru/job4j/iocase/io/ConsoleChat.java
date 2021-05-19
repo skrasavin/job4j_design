@@ -3,78 +3,76 @@ package ru.job4j.iocase.io;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 
 public class ConsoleChat {
-    private final String path;
-    private final String log;
+    private final List<String> lines = new ArrayList<>();
+    private final List<String> log = new ArrayList<>();
+    private final String logPath;
     private static final String OUT = "закончить";
     private static final String STOP = "стоп";
     private static final String CONTINUE = "продолжить";
 
-    public ConsoleChat(String path, String botAnswers) {
-        this.path = path;
-        this.log = botAnswers;
+    public ConsoleChat(String path, String logPath) throws IOException {
+        this.logPath = logPath;
+        modifyToList(path);
     }
 
-    public String choice() throws IOException {
-        String result = null;
-        int n = 0;
-        for (Scanner sc = new Scanner(Path.of(this.path)); sc.hasNext();) {
-            ++n;
-            String line = sc.nextLine();
-            if (new Random().nextInt(n) == 0) {
-                result = line;
+    public void modifyToList(String path) throws IOException {
+        if (!path.isEmpty()) {
+            for (Scanner sc = new Scanner(Path.of(path)); sc.hasNext(); ) {
+                this.lines.add(sc.nextLine());
             }
-        }
-        return result + "\n";
+        }else throw new IOException("Проверьте расположение файла");
     }
 
-    public void writeDataInFile(String path, String data) {
+    public void writeDataInFile() {
         try (BufferedWriter br = new BufferedWriter(
-                new FileWriter(path, StandardCharsets.UTF_8, true))) {
-            br.write(data + System.lineSeparator());
+                new FileWriter(logPath, StandardCharsets.UTF_8, true))) {
+            for (String log_data: log){
+                br.write(log_data + System.lineSeparator());
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public void run() throws IOException {
+    public void run() {
         Scanner in = new Scanner(System.in);
         String message;
-        System.out.println("Добро пожаловать в чат!");
-        writeDataInFile(log, "Добро пожаловать в чат!");
         String response;
+        System.out.println("Добро пожаловать в чат!");
+        log.add("Добро пожаловать в чат!");
         do {
             System.out.println("Какой у вас вопрос?");
-            writeDataInFile(log, "Какой у вас вопрос?");
+            log.add("Какой у вас вопрос?");
 
             message = in.nextLine();
 
             if (message.equals(OUT)) {
                 System.out.println("Бот закончил работу.");
-                writeDataInFile(log, "====== Бот закончил работу ====== \n");
+                log.add("====== Бот закончил работу ======" + System.lineSeparator());
                 continue;
             }
 
             if (message.equals(STOP)) {
                 System.out.println("Работа чата приостановлена");
-                writeDataInFile(log, "!!! Работа чата приостановлена !!!");
+                log.add("!!! Работа чата приостановлена !!!");
                 do {
                     message = in.nextLine();
-                    writeDataInFile(log, message);
+                    log.add(message);
                 }while (!message.equals(CONTINUE));
-                writeDataInFile(log, "\r");
+                log.add("\r");
                 continue;
             }
 
-            response = choice();
+            response = this.lines.get(new Random().nextInt(lines.size()));
             System.out.println(response);
-            writeDataInFile(log, message);
-            writeDataInFile(log, response);
+            log.add(message);
+            log.add(response);
 
         }while (!message.equals(OUT));
+        writeDataInFile();
     }
 
     public static void main(String[] args) throws IOException {
