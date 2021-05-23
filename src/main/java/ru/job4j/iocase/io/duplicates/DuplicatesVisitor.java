@@ -6,20 +6,40 @@ import java.nio.file.attribute.BasicFileAttributes;
 import java.util.*;
 
 public class DuplicatesVisitor extends SimpleFileVisitor<Path> {
-    private List<FileProperty> duplicates = new ArrayList<>();
+//    private List<FileProperty> duplicates = new ArrayList<>();
+    private Set<FileProperty> duplicates = new LinkedHashSet<>();
 
-    public List<FileProperty> findDublicate() {
-        List<FileProperty> dublicate = new ArrayList<>();
-        for (int i = 0; i < duplicates.size(); i++) {
-            for (int x = i + 1; x < duplicates.size(); x++) {
-                if (duplicates.get(i).equals(duplicates.get(x))) {
-                    dublicate.add(duplicates.get(i));
-                    dublicate.add(duplicates.get(x));
-                }
-            }
+    public Set<FileProperty> findDublicate() {
+        Set<FileProperty> dublicate = new LinkedHashSet<>();
+        for (FileProperty s : duplicates) {
+            System.out.println(s.getAbsolutePath());
         }
+
+
+//        List<FileProperty> dublicate = new ArrayList<>();
+//        for (int i = 0; i < duplicates.size(); i++) {
+//            for (int x = i + 1; x < duplicates.size(); x++) {
+//                if (duplicates.get(i).equals(duplicates.get(x))) {
+//                    dublicate.add(duplicates.get(i));
+//                    dublicate.add(duplicates.get(x));
+//                }
+//            }
+//        }
         return dublicate;
     }
+
+//    public List<FileProperty> findDublicate() {
+//        List<FileProperty> dublicate = new ArrayList<>();
+//        for (int i = 0; i < duplicates.size(); i++) {
+//            for (int x = i + 1; x < duplicates.size(); x++) {
+//                if (duplicates.get(i).equals(duplicates.get(x))) {
+//                    dublicate.add(duplicates.get(i));
+//                    dublicate.add(duplicates.get(x));
+//                }
+//            }
+//        }
+//        return dublicate;
+//    }
 
     @Override
     public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {

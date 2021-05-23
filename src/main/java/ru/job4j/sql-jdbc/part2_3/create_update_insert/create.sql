@@ -21,16 +21,6 @@ create table rules (
      rules_id int references rules(id)
  );
 
-create table comments (
-	id serial primary key,
-    name varchar(255)
-);
-
-create table attaches (
-	id serial primary key,
-    name varchar(255)
-);
-
 create table states (
 	id serial primary key,
     status varchar(255)
@@ -45,9 +35,18 @@ create table items (
 	id serial primary key,
     name varchar(255),
     user_id int references users(id),
-    comment_id int references comments(id),
-    attach_id int references attaches(id),
     category_id int references category(id),
     state_id int references states(id)
 );
 
+create table comments (
+	id serial primary key,
+    name varchar(255),
+    item_id int references items(id)
+);
+
+create table attaches (
+	id serial primary key,
+    name varchar(255),
+    item_id int references items(id)
+);
