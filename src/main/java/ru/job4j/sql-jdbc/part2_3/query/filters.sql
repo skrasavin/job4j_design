@@ -38,13 +38,14 @@ insert into product(name, type_id, expired_date, price) values ('Варенье'
 
 select * from type;
 select * from product;
-
-select * from product where type_id = 1;
+select * from product p join type t ON p.type_id = t.id AND t.name = 'Сыр';
 select * from product where name LIKE '%Домик%';
 select * from product where expired_date > '17.08.2021';
 select max(price) from product;
 select t.name, count(product.type_id) from product inner join type as t on type_id=t.id group by t.name;
-select * from product where type_id = 1 OR type_id = 2;
+
+select * from product p join type t ON p.type_id = t.id AND t.name = 'Сыр' OR
+p.type_id = t.id AND t.name = 'Молоко';
 
 select t.name, count(product.type_id) from product inner join type as t on type_id=t.id group by t.name
 having count(product.type_id) < 4;
