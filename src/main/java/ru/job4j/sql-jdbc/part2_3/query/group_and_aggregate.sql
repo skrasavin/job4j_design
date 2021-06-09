@@ -24,14 +24,18 @@ insert into people(name) values ('Таня');
 insert into people(name) values ('Саша');
 insert into people(name) values ('Миша');
 
-insert into devices_people(device_id, people_id) values (1, 3);
-insert into devices_people(device_id, people_id) values (2, 2);
-insert into devices_people(device_id, people_id) values (3, 1);
+insert into devices_people(people_id, device_id) values (1, 1);
+insert into devices_people(people_id, device_id) values (1, 2);
+insert into devices_people(people_id, device_id) values (2, 2);
+insert into devices_people(people_id, device_id) values (3, 1);
 
 select avg(price) from devices;
 
-select p.name, avg(d.price) from devices_people as dp join devices as d on dp.people_id = d.id
-join people as p on dp.device_id = p.id group by p.name;
+select p.name, avg(d.price) from devices_people as dp
+join devices as d on dp.device_id = d.id
+join people as p on dp.people_id = p.id group by p.name;
 
-select p.name, avg(d.price) from devices_people as dp join devices as d on dp.people_id = d.id
-join people as p on dp.device_id = p.id group by p.name having avg(d.price) > 500;
+select p.name, avg(d.price) from devices_people as dp
+join devices as d on dp.device_id = d.id
+join people as p on dp.people_id = p.id group by p.name
+having avg(d.price) > 950;
