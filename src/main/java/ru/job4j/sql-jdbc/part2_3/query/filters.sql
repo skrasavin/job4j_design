@@ -40,7 +40,7 @@ select * from type;
 select * from product;
 select * from product p join type t ON p.type_id = t.id AND t.name = 'Сыр';
 select * from product where name LIKE '%Домик%';
-select * from product where expired_date > '17.08.2021';
+select * from product where expired_date = '17.08.2021';
 select max(price) from product;
 select t.name, count(product.type_id) from product inner join type as t on type_id=t.id group by t.name;
 
