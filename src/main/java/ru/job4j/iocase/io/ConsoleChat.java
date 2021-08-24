@@ -20,17 +20,19 @@ public class ConsoleChat {
 
     public void modifyToList(String path) throws IOException {
         if (!path.isEmpty()) {
-            for (Scanner sc = new Scanner(Path.of(path)); sc.hasNext(); ) {
+            for (Scanner sc = new Scanner(Path.of(path)); sc.hasNext();) {
                 this.lines.add(sc.nextLine());
             }
-        }else throw new IOException("Проверьте расположение файла");
+        } else {
+            throw new IOException("Проверьте расположение файла");
+        }
     }
 
     public void writeDataInFile() {
         try (BufferedWriter br = new BufferedWriter(
                 new FileWriter(logPath, StandardCharsets.UTF_8, true))) {
-            for (String log_data: log){
-                br.write(log_data + System.lineSeparator());
+            for (String logData: log) {
+                br.write(logData + '\n');
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -51,7 +53,7 @@ public class ConsoleChat {
 
             if (message.equals(OUT)) {
                 System.out.println("Бот закончил работу.");
-                log.add("====== Бот закончил работу ======" + System.lineSeparator());
+                log.add("====== Бот закончил работу ======" + '\n');
                 continue;
             }
 
@@ -61,7 +63,7 @@ public class ConsoleChat {
                 do {
                     message = in.nextLine();
                     log.add(message);
-                }while (!message.equals(CONTINUE));
+                } while (!message.equals(CONTINUE));
                 log.add("\r");
                 continue;
             }
@@ -71,7 +73,7 @@ public class ConsoleChat {
             log.add(message);
             log.add(response);
 
-        }while (!message.equals(OUT));
+        } while (!message.equals(OUT));
         writeDataInFile();
     }
 
