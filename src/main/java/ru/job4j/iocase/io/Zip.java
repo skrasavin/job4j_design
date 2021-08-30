@@ -36,12 +36,20 @@ public class Zip {
             e.printStackTrace();
         }
     }
-
+//C:/Users/sskra/IdeaProjects/job4j_tracker
     public static void main(String[] args) throws IOException {
         Search search = new Search();
-        List<Path> result = search.search(Paths.get("/home/serg/IdeaProjects/job4j_tracker"),
+        List<Path> result = search.search(Paths.get("C:/Users/sskra/IdeaProjects/job4j_tracker"),
                 p -> !p.toFile().getName().endsWith("class"));
-        new Zip().packFiles(result, new File("/home/serg/IdeaProjects/job4j_tracker.zip"));
+        new Zip().packFiles(result, new File("C:/Users/sskra/IdeaProjects/job4j_tracker.zip"));
+
+
+//        Search search = new Search();
+//        List<Path> result = search.search(Paths.get("/home/serg/IdeaProjects/job4j_tracker"),
+//                p -> !p.toFile().getName().endsWith("class"));
+//        new Zip().packFiles(result, new File("/home/serg/IdeaProjects/job4j_tracker.zip"));
+
+
 //        new Zip().packSingleFile(
 //                new File("/home/serg/IdeaProjects/job4j_tracker"),
 //                new File("/home/serg/IdeaProjects/job4j_tracker.zip")

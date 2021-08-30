@@ -1,4 +1,4 @@
-package ru.job4j.iocase.serialization.JsonObject;
+//package ru.job4j.iocase.serialization.JsonObject;
 
 public class Skills {
     private final String skill;
@@ -13,8 +13,8 @@ public class Skills {
 
     @Override
     public String toString() {
-        return "Skills{" +
-                "skill='" + skill + '\'' +
-                '}';
+        return "Skills{"
+                + "skill='" + skill + '\''
+                + '}';
     }
 }

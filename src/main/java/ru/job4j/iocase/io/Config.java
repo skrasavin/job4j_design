@@ -29,7 +29,7 @@ public class Config {
                 if (testSc.contains("=") && !testSc.contains("#")) {
                     String k = testSc.split("=")[0];
                     String v = testSc.split("=")[1];
-                    values.put(k,v);
+                    values.put(k, v);
                 }
             }
         } catch (IOException e) {

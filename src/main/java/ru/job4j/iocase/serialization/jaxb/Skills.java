@@ -13,11 +13,12 @@ public class Skills {
         this.skill = skill;
     }
 
-    public Skills() {}
+    public Skills() { }
     @Override
     public String toString() {
-        return "Skills{" +
-                "skill='" + skill + '\'' +
-                '}';
+        return "Skills{"
+                + "skill='" + skill
+                + '\''
+                + '}';
     }
 }

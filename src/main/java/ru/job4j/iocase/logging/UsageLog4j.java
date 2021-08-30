@@ -30,9 +30,9 @@ public class UsageLog4j {
 
 
 
-        LOG.debug("User info name : {}, age : {}," +
-                  " shedule : {}, height : {}, weight : {}, salary : {}" +
-                  " department : {}, admin : {}  ", name, age, schedule,
+        LOG.debug("User info name : {}, age : {},"
+                  + " shedule : {}, height : {}, weight : {}, salary : {}"
+                  + " department : {}, admin : {}  ", name, age, schedule,
                 height, weight, salary, department, admin);
     }
 }

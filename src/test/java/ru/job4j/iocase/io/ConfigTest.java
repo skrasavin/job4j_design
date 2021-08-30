@@ -31,7 +31,7 @@ public class ConfigTest {
 
 
     @Test(expected = IllegalArgumentException.class)
-    public void whenReadLineWithComment() throws IllegalArgumentException{
+    public void whenReadLineWithComment() throws IllegalArgumentException {
         String path = "iofiles/appForTest.properties";
         Config config = new Config(path);
         config.load();

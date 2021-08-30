@@ -25,7 +25,7 @@ public class Doctor {
 
     private Skills skills;
 
-    public Doctor() {}
+    public Doctor() { }
 
     public Doctor(String name, int age, boolean experience, Skills skills, String... studies) {
         this.name = name;
@@ -37,13 +37,14 @@ public class Doctor {
 
     @Override
     public String toString() {
-        return "Doctor{" +
-                "name='" + name + '\'' +
-                ", age=" + age +
-                ", experience=" + experience +
-                ", studies=" + Arrays.toString(studies) +
-                ", skills=" + skills +
-                '}';
+        return "Doctor{"
+                + "name='" + name
+                + '\''
+                + ", age=" + age
+                + ", experience=" + experience
+                + ", studies=" + Arrays.toString(studies)
+                + ", skills=" + skills
+                + '}';
     }
 
     public static void main(String[] args) throws JAXBException {
@@ -61,7 +62,7 @@ public class Doctor {
             marshaller.marshal(doctor, writer);
             result = writer.getBuffer().toString();
             System.out.println(result);
-        }catch(Exception e) {
+        } catch (Exception e) {
             System.out.println(e.getClass());
         }
         // Для десериализации нам нужно создать десериализатор

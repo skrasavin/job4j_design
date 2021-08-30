@@ -11,6 +11,7 @@ public class EchoServer {
 
     private static final Logger LOG = LoggerFactory.getLogger(UsageLog4j.class.getName());
 
+    @SuppressWarnings("checkstyle:InnerAssignment")
     public static void main(String[] args) {
 //        try (ServerSocket server = new ServerSocket(9000)) {
         try (ServerSocket server = new ServerSocket()) {
@@ -33,14 +34,14 @@ public class EchoServer {
                                 .equals("Hello")) {
                             out.write("Hello, dear friend.".getBytes());
                             break;
-                        }else {
+                        } else {
                             out.write("What?".getBytes());
                             break;
                         }
                     }
                 }
             }
-        }catch (Exception e) {
+        } catch (Exception e) {
             LOG.error("Check connection parameters", e);
         }
     }

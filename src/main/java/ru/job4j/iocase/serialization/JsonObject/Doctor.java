@@ -1,4 +1,4 @@
-package ru.job4j.iocase.serialization.JsonObject;
+//package ru.job4j.iocase.serialization.JsonObject;
 
 import org.json.JSONObject;
 import java.util.Arrays;
@@ -40,13 +40,13 @@ public class Doctor {
 
     @Override
     public String toString() {
-        return "Doctor{" +
-                "name='" + name + '\'' +
-                ", age=" + age +
-                ", experience=" + experience +
-                ", studies=" + Arrays.toString(studies) +
-                ", skills=" + skills +
-                '}';
+        return "Doctor{"
+                + "name='" + name
+                + '\''
+                + ", age=" + age
+                + ", experience=" + experience
+                + ", studies=" + Arrays.toString(studies)
+                + ", skills=" + skills + '}';
     }
 
     public static void main(String[] args) {

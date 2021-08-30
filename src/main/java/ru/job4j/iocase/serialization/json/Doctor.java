@@ -24,13 +24,14 @@ public class Doctor {
 
     @Override
     public String toString() {
-        return "Doctor{" +
-                "name='" + name + '\'' +
-                ", age=" + age +
-                ", experience=" + experience +
-                ", studies=" + Arrays.toString(studies) +
-                ", skills=" + skills +
-                '}';
+        return "Doctor{"
+                + "name='" + name
+                + '\''
+                + ", age=" + age
+                + ", experience=" + experience
+                + ", studies=" + Arrays.toString(studies)
+                + ", skills=" + skills
+                + '}';
     }
 
     public static void main(String[] args) {
