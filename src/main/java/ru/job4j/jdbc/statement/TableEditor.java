@@ -31,7 +31,7 @@ public class TableEditor implements AutoCloseable {
         Properties properties = new Properties();
         properties.put("path", path);
         TableEditor tableEditor = new TableEditor(properties);
-//        tableEditor.createTable("Job4J");
+//        tableEditor.createTable("emptyTable");
 //        tableEditor.dropTable("Job4J");
 //        tableEditor.addColumn("Job4J", "pass", "VARCHAR");
 //        tableEditor.addColumn("Job4J", "pass1", "VARCHAR");
@@ -42,18 +42,17 @@ public class TableEditor implements AutoCloseable {
 
     public void executeCommandInTable(String command) throws Exception {
         try (Statement statement = connection.createStatement()) {
-            String sql = command;
-            statement.execute(sql);
+            statement.execute(command);
         }
     }
 
 
     // - createTable() – создает пустую таблицу без столбцов с указанным именем;
     public void createTable(String tableName) throws Exception {
+//        String sqlCommand = "create table if not exists %s(%s);";
         String sqlCommand = String.format(
-                "create table if not exists " + tableName + "(%s, %s)",
-                "id serial primary key",
-                "name text"
+                "create table if not exists " + tableName + "(%s);",
+                "id serial primary key"
         );
         executeCommandInTable(sqlCommand);
         System.out.println("Table created");

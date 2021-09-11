@@ -1,6 +1,8 @@
-//package ru.job4j.iocase.serialization.JsonObject;
+package ru.job4j.iocase.serialization.jsonobject;
 
 import org.json.JSONObject;
+import ru.job4j.iocase.serialization.jaxb.Skills;
+
 import java.util.Arrays;
 
 public class Doctor {
@@ -60,9 +62,9 @@ public class Doctor {
         jsonObject.put("experience", doctor.isExperience());
         jsonObject.put("studies", doctor.getStudies());
         jsonObject.put("skills", doctor.getSkills());
-        System.out.println(jsonObject.toString());
+        System.out.println(jsonObject);
 
         /* Преобразуем объект person в json-строку */
-        System.out.println(new JSONObject(doctor).toString());
+        System.out.println(new JSONObject(doctor));
     }
 }
