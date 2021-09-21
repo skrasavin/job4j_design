@@ -39,7 +39,12 @@ insert into car(name, carcase_id, engine_id, transmission_id) values ('bmw', 3, 
 
 
 1) Вывести список всех машин и все привязанные к ним детали.
-select * from car;
+select car.name, carcase.name, engine.name, transmission.name
+from car left join carcase on car.carcase_id = carcase.id
+left join engine on car.engine_id = engine.id
+left join transmission on car.transmission_id = transmission.id;
+
+
 
 2) Вывести отдельно детали (1 деталь - 1 запрос),
 которые не используются НИ в одной машине, кузова, двигатели, коробки передач.
