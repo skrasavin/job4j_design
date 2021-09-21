@@ -60,4 +60,4 @@ insert into teens(name, gender) values ('Karl', 'M');
 insert into teens(name, gender) values ('Sally', 'W');
 insert into teens(name, gender) values ('Tomas', 'M');
 
-select n1.name as a, n2.name as b, (n1.gender != n2.gender) as "Pair" from teens n1 cross join teens n2;
+select n1.name as a, n2.name as b from teens n1 cross join teens n2 where n1.gender != n2.gender;
