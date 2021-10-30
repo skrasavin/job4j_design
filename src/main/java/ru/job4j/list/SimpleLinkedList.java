@@ -1,14 +1,11 @@
 package ru.job4j.list;
 
-import java.util.ConcurrentModificationException;
-import java.util.Iterator;
-import java.util.NoSuchElementException;
-import java.util.Objects;
+import java.util.*;
 
 public class SimpleLinkedList<E> implements List<E> {
 
-        private Node<E> firstNode;
-        private Node<E> lastNode;
+        private final Node<E> firstNode;
+        private final Node<E> lastNode;
         private int size;
         private int modCount;
 
@@ -53,7 +50,7 @@ public class SimpleLinkedList<E> implements List<E> {
             return rsl.currentValue;
         }
 
-        /**
+    /**
          * Returns an iterator over elements of type {@code T}.
          *
          * @return an Iterator.

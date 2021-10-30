@@ -52,23 +52,18 @@ public class Doctor {
                 "Uni", "Praxis");
 
         JAXBContext context = JAXBContext.newInstance(Doctor.class);
-        // Создаем сериализатор
         Marshaller marshaller = context.createMarshaller();
-        // Указываем, что нам нужно форматирование
         marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
         String result = "";
         try (StringWriter writer = new StringWriter()) {
-            // Сериализуем
             marshaller.marshal(doctor, writer);
             result = writer.getBuffer().toString();
             System.out.println(result);
         } catch (Exception e) {
             System.out.println(e.getClass());
         }
-        // Для десериализации нам нужно создать десериализатор
         Unmarshaller unmarshaller = context.createUnmarshaller();
         try (StringReader reader = new StringReader(result)) {
-            // десериализуем
             Doctor res = (Doctor) unmarshaller.unmarshal(reader);
             System.out.println(res);
         }

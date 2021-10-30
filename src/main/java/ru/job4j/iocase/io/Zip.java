@@ -4,7 +4,6 @@ import ru.job4j.iocase.io.file.Search;
 
 import java.io.*;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
@@ -36,12 +35,15 @@ public class Zip {
             e.printStackTrace();
         }
     }
-//C:/Users/sskra/IdeaProjects/job4j_tracker
+//"C:/Users/sskra/IdeaProjects/job4j_design"
+//"class"
+
     public static void main(String[] args) throws IOException {
         Search search = new Search();
-        List<Path> result = search.search(Paths.get("C:/Users/sskra/IdeaProjects/job4j_tracker"),
-                p -> !p.toFile().getName().endsWith("class"));
-        new Zip().packFiles(result, new File("C:/Users/sskra/IdeaProjects/job4j_tracker.zip"));
+        List<Path> result = Search.newSearch(
+                "C:/Users/sskra/IdeaProjects/job4j_design", "class"
+        );
+        new Zip().packFiles(result, new File("C:/Users/sskra/IdeaProjects/test.zip"));
 
 
 //        Search search = new Search();

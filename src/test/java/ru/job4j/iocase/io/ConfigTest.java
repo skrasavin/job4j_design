@@ -28,12 +28,4 @@ public class ConfigTest {
                 is("qweasd")
         );
     }
-
-//
-//    @Test(expected = IllegalArgumentException.class)
-//    public void whenReadLineWithComment() throws IllegalArgumentException {
-//        String path = "iofiles/app.properties";
-//        Config config = new Config(path);
-//        config.load();
-//    }
 }

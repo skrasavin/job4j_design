@@ -12,20 +12,15 @@ public class SimpleArray<T> implements Iterable<T> {
         list = new Object[length];
     }
 
-    //добавляет указанный элемент (model) в первую свободную ячейку;
     public void add(T model) {
         list[cursor++] = model;
     }
 
-    // заменяет указанным элементом (model) элемент, находящийся по индексу index;
     public void set(int index, T model) {
         Objects.checkIndex(index, cursor);
         list[index] = model;
-
     }
 
-    //удаляет элемент по указанному индексу, все находящиеся справа элементы
-    //при этом необходимо сдвинуть на единицу влево (в середине массива не должно быть пустых ячеек);
     public void remove(int index) {
         Objects.checkIndex(index, cursor);
         System.arraycopy(list, index + 1, list,
@@ -33,12 +28,10 @@ public class SimpleArray<T> implements Iterable<T> {
         cursor--;
     }
 
-    //возвращает элемент, расположенный по указанному индексу;
     public T get(int index) {
         Objects.checkIndex(index, cursor);
         return (T) list[index];
     }
-
 
     @Override
     public Iterator<T> iterator() {
@@ -74,11 +67,6 @@ public class SimpleArray<T> implements Iterable<T> {
         System.out.println(a.iterator().next());
         System.out.println(a.iterator().next());
         System.out.println(a.iterator().next());
-
-
-//        for (int x = 0; x < a.cursor; x++) {
-//            System.out.println(x + " : " + a.get(x));
-//        }
     }
 
 }

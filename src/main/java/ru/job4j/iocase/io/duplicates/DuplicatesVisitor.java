@@ -33,17 +33,3 @@ public class DuplicatesVisitor extends SimpleFileVisitor<Path> {
                 a -> System.out.println(a.getName() + " - " + a.getAbsolutePath()));
     }
 }
-
-
-//    public List<FileProperty> findDublicate1() {
-//        List<FileProperty> dublicate = new ArrayList<>();
-//        for (int i = 0; i < duplicates.size(); i++) {
-//            for (int x = i + 1; x < duplicates.size(); x++) {
-//                if (duplicates.get(i).equals(duplicates.get(x))) {
-//                    dublicate.add(duplicates.get(i));
-//                    dublicate.add(duplicates.get(x));
-//                }
-//            }
-//        }
-//        return dublicate;
-//    }

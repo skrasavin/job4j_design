@@ -21,4 +21,11 @@ public class Search {
         Files.walkFileTree(root, searcher);
         return searcher.getPaths();
     }
+
+    public static List<Path> newSearch(String path, String excludeFileType) throws IOException {
+        List<Path> result = Search.search(Paths.get(String.valueOf(path)),
+                p -> !p.toFile().getName().endsWith(excludeFileType));
+        return result;
+    }
+
 }
