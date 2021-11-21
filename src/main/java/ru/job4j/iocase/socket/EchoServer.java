@@ -13,16 +13,15 @@ public class EchoServer {
 
     @SuppressWarnings("checkstyle:InnerAssignment")
     public static void main(String[] args) {
-//        try (ServerSocket server = new ServerSocket(9000)) {
         try (ServerSocket server = new ServerSocket()) {
             while (!server.isClosed()) {
                 Socket socket = server.accept();
                 try (OutputStream out = socket.getOutputStream();
                      BufferedReader in = new BufferedReader(
                              new InputStreamReader(socket.getInputStream()))) {
-                    String str;
+                    String str = null;
                     int a = 0;
-                    while (!(str = in.readLine()).isEmpty()) {
+                    while (!(in.readLine()).isEmpty()) {
                         out.write("HTTP/1.1 200 OK\r\n\r\n".getBytes());
                         if (str.contains("msg") && str.split("msg=")[1].split(" ")[0]
                                 .equals("Exit")) {
