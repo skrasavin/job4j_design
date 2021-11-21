@@ -1,4 +1,4 @@
-//package ru.job4j.iocase.serialization.JsonObject;
+package ru.job4j.iocase.serialization.jsonobject;
 
 public class Skills {
     private final String skill;
