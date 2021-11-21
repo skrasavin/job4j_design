@@ -2,15 +2,19 @@ package ru.job4j.list;
 
 public class SimpleStack<T> {
     private ForwardLinked<T> linked = new ForwardLinked<>();
+    private int size = 0;
 
     public T pop() {
-        if (linked.getSize() == 1) {
-            return linked.deleteFirst();
-        }
-        return linked.deleteLast();
+        size--;
+        return linked.deleteFirst();
     }
 
     public void push(T value) {
-        linked.add(value);
+        linked.addFirst(value);
+        size++;
+    }
+
+    public int getSize() {
+        return size;
     }
 }
