@@ -13,7 +13,7 @@ public class LinkedArray<T> implements Iterable {
     }
 
     public LinkedArray() {
-        lastNode = new Node<>(null, firstNode, null);
+        lastNode = new Node<>(null, null, null);
         firstNode = new Node<>(null, null, lastNode);
     }
 
