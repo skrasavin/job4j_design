@@ -23,6 +23,7 @@ public class EchoServer {
                     int a = 0;
                     while (!(in.readLine()).isEmpty()) {
                         out.write("HTTP/1.1 200 OK\r\n\r\n".getBytes());
+                        assert false;
                         if (str.contains("msg") && str.split("msg=")[1].split(" ")[0]
                                 .equals("Exit")) {
                                 out.write("Bye.".getBytes());
@@ -32,11 +33,10 @@ public class EchoServer {
                         if (str.contains("msg") && str.split("msg=")[1].split(" ")[0]
                                 .equals("Hello")) {
                             out.write("Hello, dear friend.".getBytes());
-                            break;
                         } else {
                             out.write("What?".getBytes());
-                            break;
                         }
+                        break;
                     }
                 }
             }
