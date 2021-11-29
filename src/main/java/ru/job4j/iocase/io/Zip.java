@@ -9,8 +9,10 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
 public class Zip {
+    /**
     //java -jar pack.jar -d=/home/serg/IdeaProjects/job4j_tracker -e=class
     // -o=/home/serg/IdeaProjects/job4j_tracker.zip
+     */
     public void packFiles(List<Path> sources, File target) {
         try (ZipOutputStream zip = new ZipOutputStream(new BufferedOutputStream(new FileOutputStream(target)))) {
             for (Path path : sources) {
@@ -35,9 +37,11 @@ public class Zip {
             e.printStackTrace();
         }
     }
-//"C:/Users/sskra/IdeaProjects/job4j_design"
-//"class"
 
+    /**
+    //"C:/Users/sskra/IdeaProjects/job4j_design"
+    //"class"
+    */
     public static void main(String[] args) throws IOException {
         Search search = new Search();
         List<Path> result = Search.newSearch(
@@ -45,7 +49,7 @@ public class Zip {
         );
         new Zip().packFiles(result, new File("C:/Users/sskra/IdeaProjects/test.zip"));
 
-
+/**
 //        Search search = new Search();
 //        List<Path> result = search.search(Paths.get("/home/serg/IdeaProjects/job4j_tracker"),
 //                p -> !p.toFile().getName().endsWith("class"));
@@ -56,5 +60,6 @@ public class Zip {
 //                new File("/home/serg/IdeaProjects/job4j_tracker"),
 //                new File("/home/serg/IdeaProjects/job4j_tracker.zip")
 //        );
+ */
     }
 }
