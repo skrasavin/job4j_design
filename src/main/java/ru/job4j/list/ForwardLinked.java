@@ -2,43 +2,12 @@ package ru.job4j.list;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
-import java.util.Queue;
 
 public class ForwardLinked<T> implements Iterable<T> {
+
     private Node<T> head;
-    private int size;
-
-    public int getSize() {
-        return size;
-    }
-
-    public T deleteFirst() {
-        if (head == null) {
-            throw new NoSuchElementException("Список пуст");
-        }
-        T value = head.value;
-        head = head.next;
-        size--;
-        return value;
-
-    }
-
-    public T deleteLast() {
-        if (head == null) {
-            throw new NoSuchElementException("Список пуст");
-        }
-        Node<T> tail = head;
-        while (tail.next.next != null) {
-            tail = tail.next;
-        }
-        T value = tail.next.value;
-        tail.next = null;
-        size--;
-        return value;
-    }
 
     public void add(T value) {
-        size++;
         Node<T> node = new Node<>(value, null);
         if (head == null) {
             head = node;
@@ -49,6 +18,22 @@ public class ForwardLinked<T> implements Iterable<T> {
             tail = tail.next;
         }
         tail.next = node;
+    }
+
+    public void addFirst(T value) {
+        Node<T> node = new Node<>(value, null);
+        node.next = head;
+        head = node;
+    }
+
+    public T deleteFirst() {
+        if (head == null) {
+            throw new NoSuchElementException();
+        }
+        Node<T> node = head;
+        head = node.next;
+        node.next = null;
+        return node.value;
     }
 
     @Override
@@ -71,10 +56,6 @@ public class ForwardLinked<T> implements Iterable<T> {
                 return value;
             }
         };
-    }
-
-    public void addFirst(T value) {
-        head = new Node<>(value, head);
     }
 
     private static class Node<T> {
