@@ -10,8 +10,8 @@ import java.util.zip.ZipOutputStream;
 
 public class Zip {
     /**
-    //java -jar pack.jar -d=/home/serg/IdeaProjects/job4j_tracker -e=class
-    // -o=/home/serg/IdeaProjects/job4j_tracker.zip
+        java -jar pack.jar -d=/home/serg/IdeaProjects/job4j_tracker -e=class
+         -o=/home/serg/IdeaProjects/job4j_tracker.zip
      */
     public void packFiles(List<Path> sources, File target) {
         try (ZipOutputStream zip = new ZipOutputStream(new BufferedOutputStream(new FileOutputStream(target)))) {
@@ -39,8 +39,8 @@ public class Zip {
     }
 
     /**
-    //"C:/Users/sskra/IdeaProjects/job4j_design"
-    //"class"
+        "C:/Users/sskra/IdeaProjects/job4j_design"
+        "class"
     */
     public static void main(String[] args) throws IOException {
         Search search = new Search();
@@ -50,16 +50,16 @@ public class Zip {
         new Zip().packFiles(result, new File("C:/Users/sskra/IdeaProjects/test.zip"));
 
 /**
-//        Search search = new Search();
-//        List<Path> result = search.search(Paths.get("/home/serg/IdeaProjects/job4j_tracker"),
-//                p -> !p.toFile().getName().endsWith("class"));
-//        new Zip().packFiles(result, new File("/home/serg/IdeaProjects/job4j_tracker.zip"));
+        Search search = new Search();
+        List<Path> result = search.search(Paths.get("/home/serg/IdeaProjects/job4j_tracker"),
+                p -> !p.toFile().getName().endsWith("class"));
+        new Zip().packFiles(result, new File("/home/serg/IdeaProjects/job4j_tracker.zip"));
 
 
-//        new Zip().packSingleFile(
-//                new File("/home/serg/IdeaProjects/job4j_tracker"),
-//                new File("/home/serg/IdeaProjects/job4j_tracker.zip")
-//        );
+        new Zip().packSingleFile(
+                new File("/home/serg/IdeaProjects/job4j_tracker"),
+                new File("/home/serg/IdeaProjects/job4j_tracker.zip")
+        );
  */
     }
 }
