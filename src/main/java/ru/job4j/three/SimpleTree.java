@@ -1,21 +1,40 @@
 package ru.job4j.three;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
-public interface SimpleTree<E> {
+public class SimpleTree<E> implements Tree<E> {
+    private final Node<E> root;
 
-    boolean add(E parent, E child);
+    public SimpleTree(final E root) {
+        this.root = new Node<>(root);
+    }
 
-    Optional<Node<E>> findBy(E value);
-
-    class Node<E> {
-        final E value;
-        final List<Node<E>> children = new ArrayList<>();
-
-        public Node(E value) {
-            this.value = value;
+    @Override
+    public boolean add(E parent, E child) {
+        boolean rsl = false;
+        Optional<Node<E>> parentResult = findBy(parent);
+        Optional<Node<E>> dublicateChild = findBy(child);
+        if (parentResult.isPresent() && dublicateChild.isEmpty()) {
+            Node<E> newChild = new Node<>(child);
+            parentResult.get().children.add(newChild);
+            rsl = true;
         }
+        return rsl;
+    }
+
+    @Override
+    public Optional<Node<E>> findBy(E value) {
+        Optional<Node<E>> rsl = Optional.empty();
+        Queue<Node<E>> data = new LinkedList<>();
+        data.offer(this.root);
+        while (!data.isEmpty()) {
+            Node<E> el = data.poll();
+            if (el.value.equals(value)) {
+                rsl = Optional.of(el);
+                break;
+            }
+            data.addAll(el.children);
+        }
+        return rsl;
     }
 }
