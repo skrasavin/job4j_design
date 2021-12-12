@@ -4,7 +4,8 @@ import java.util.Comparator;
 import java.util.List;
 
 public class MaxMin {
-    public <T> T max(List<T> value, Comparator<T> comparator) {
+
+    public <T> T solution(List<T> value, Comparator<T> comparator) {
         while (value.size() != 1) {
             if (comparator.compare(value.get(0), value.get(1)) < 1) {
                 value.remove(value.get(0));
@@ -15,7 +16,11 @@ public class MaxMin {
         return value.get(0);
     }
 
+    public <T> T max(List<T> value, Comparator<T> comparator) {
+        return solution(value, comparator);
+    }
+
     public <T> T min(List<T> value, Comparator<T> comparator) {
-        return max(value, comparator.reversed());
+        return solution(value, comparator.reversed());
     }
 }
