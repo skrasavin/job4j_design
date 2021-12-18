@@ -6,11 +6,11 @@ import java.util.List;
 public class MaxMin {
 
     public <T> T solution(List<T> value, Comparator<T> comparator) {
-        Integer res = (Integer) value.get(0);
+        T res = value.get(0);
         for (var val : value) {
-            res = comparator.compare((T) res, val) > 0 ? res : (Integer) val;
+            res = comparator.compare(res, val) > 0 ? res : val;
         }
-        return (T) res;
+        return res;
     }
 
     public <T> T max(List<T> value, Comparator<T> comparator) {
