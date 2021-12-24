@@ -18,12 +18,13 @@ public class BotTest {
         String template = "I am a ${name}, Who are ${subject}?";
         String testResponse = "I am a Richard, Who are you?";
         Map<String, String> example = new HashMap<>();
-        example.put("Richard", "you");
+        example.put("name", "Richard");
+        example.put("subject", "you");
         assertThat(testResponse, is(bot.produce(template, example)));
     }
 
     @Ignore
-    @Test(expected = IllegalTemplateException.class)
+    @Test(expected = IllegalArgumentException.class)
     public void secondResponse() {
         Bot bot = new Bot();
         String template = "I am a ${name}, Who are ${subject}?"
@@ -39,7 +40,9 @@ public class BotTest {
         Bot bot = new Bot();
         String template = "I am a ${name}, Who are ${subject}?";
         Map<String, String> example = new HashMap<>();
-        example.put("Richard", "111");
+        example.put("name", "Richard");
+        example.put("subject", "you");
+        example.put("age", "18");
         bot.produce(template, example);
     }
 }
