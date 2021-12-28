@@ -4,9 +4,10 @@ import java.util.*;
 
 public class SimpleMap<K, V> implements Map<K, V> {
     private static final float LOAD_FACTOR = 0.75f;
-    private final int capacity = 8;
+    private int capacity = 8;
     private int modCount = 0;
     private int size = 0;
+    private int count = 0;
 
     private MapEntry<K, V>[] table = new MapEntry[capacity];
 
@@ -27,16 +28,14 @@ public class SimpleMap<K, V> implements Map<K, V> {
     }
 
     private void expand() {
-        if (size >= capacity * LOAD_FACTOR) {
-            MapEntry<K, V>[] temp = table;
-            table = new MapEntry[table.length * 2];
-            for (MapEntry<K, V> bucket : temp) {
-                if (bucket != null) {
-                    MapEntry<K, V> elem;
-                    table[indexFor(hash(bucket.key))] = bucket;
-                }
+        MapEntry<K, V>[] oldTable = table;
+        capacity *= 2;
+        table = new MapEntry[capacity];
+        count = 0;
+        for (var entry : oldTable) {
+            if (entry != null) {
+                put(entry.key, entry.value);
             }
-            modCount++;
         }
     }
 
@@ -87,15 +86,18 @@ public class SimpleMap<K, V> implements Map<K, V> {
                 if (expectedModCount != modCount) {
                     throw new ConcurrentModificationException();
                 }
-                return table[cursor] != null;
+                return cursor < count;
             }
 
             @Override
             public Object next() {
-                if (!hasNext()) {
+                if (expectedModCount != modCount) {
+                    throw new ConcurrentModificationException();
+                }
+                if (cursor >= count) {
                     throw new NoSuchElementException();
                 }
-                return table[cursor++];
+                return table[cursor++].key;
             }
         };
     }
