@@ -76,32 +76,30 @@ public class SimpleMap<K, V> implements Map<K, V> {
     }
 
     @Override
-    public Iterator iterator() {
-        return new Iterator() {
-            private final int expectedModCount = modCount;
-            int cursor = 0;
+    public Iterator<K> iterator() {
+        return new Iterator<>() {
+            int expectedModCount = modCount;
 
             @Override
             public boolean hasNext() {
                 if (expectedModCount != modCount) {
                     throw new ConcurrentModificationException();
                 }
-                return cursor < count;
+                while (count < capacity && table[count] == null) {
+                    count++;
+                }
+                return count < capacity;
             }
 
             @Override
-            public Object next() {
-                if (expectedModCount != modCount) {
-                    throw new ConcurrentModificationException();
-                }
-                if (cursor >= count) {
+            public K next() {
+                if (!hasNext()) {
                     throw new NoSuchElementException();
                 }
-                return table[cursor++].key;
+                return table[count++].key;
             }
         };
     }
-
     private static class MapEntry<K, V> {
         K key;
         V value;
