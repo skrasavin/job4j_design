@@ -4,11 +4,12 @@ import java.util.function.Predicate;
 
 public class SalatyTypeReport implements Report {
 
-    private Store store;
+    private final Store store;
 
     public SalatyTypeReport(Store store) {
         this.store = store;
     }
+
     @Override
     public String generate(Predicate<Employee> filter) {
         double surcharge = 1.5;

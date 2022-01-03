@@ -1,13 +1,12 @@
 package ru.job4j.map.simple.reports;
 
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
 
 public class ForHrReport implements Report {
 
-    private Store store;
+    private final Store store;
 
     public ForHrReport(Store store) {
         this.store = store;
