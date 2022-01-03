@@ -18,11 +18,4 @@ public class MemStore implements Store {
     public List<Employee> findBy(Predicate<Employee> filter) {
         return employees.stream().filter(filter).collect(Collectors.toList());
     }
-
-    @Override
-    public List<Employee> findBySalaryDesk(Predicate<Employee> filter) {
-        return employees.stream().filter(filter)
-                .sorted(Comparator.comparingDouble(Employee::getSalary).reversed())
-                .collect(Collectors.toList());
-    }
 }
