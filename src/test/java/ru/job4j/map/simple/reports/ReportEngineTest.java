@@ -2,10 +2,59 @@ package ru.job4j.map.simple.reports;
 
 import static org.junit.Assert.assertThat;
 import static org.hamcrest.Matchers.is;
+
 import org.junit.Test;
+
+import javax.xml.bind.JAXBException;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 public class ReportEngineTest {
+
+    @Test
+    public void whenGenerateReportInXML() throws JAXBException {
+        MemStore store = new MemStore();
+        Calendar hiredDate = new GregorianCalendar();
+        Calendar firedDate = new GregorianCalendar();
+        hiredDate.set(2020, Calendar.MARCH, 21, 2, 2, 2);
+        firedDate.set(2019, Calendar.MAY, 22, 3, 3, 3);
+        Employee worker = new Employee("Ivan", hiredDate, firedDate, 100);
+        store.add(worker);
+        XMLReportGenerator xml = new XMLReportGenerator(store);
+        String exprectedXML = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n"
+                + "<Reports>\n"
+                + "    <employees>"
+                + xml.generate(em -> true).substring(81, 134) + "\n"
+                + xml.generate(em -> true).substring(135, 188)
+                + "        <name>Ivan</name>\n"
+                + "        <salary>100.0</salary>\n"
+                + "    </employees>\n"
+                + "</Reports>\n";
+
+        assertThat(xml.generate(em -> true), is(exprectedXML));
+    }
+
+    @Test
+    public void whenGenerateReportInGson() {
+        MemStore store = new MemStore();
+        Calendar hiredDate = new GregorianCalendar();
+        Calendar firedDate = new GregorianCalendar();
+        hiredDate.set(2020, Calendar.MARCH, 21, 2, 2, 2);
+        firedDate.set(2019, Calendar.MAY, 22, 3, 3, 3);
+        Employee worker = new Employee("Ivan", hiredDate, firedDate, 100);
+        store.add(worker);
+        String expectedJson = "["
+                + "{\"name\":\"Ivan\","
+                + "\"hired\":{\"year\":2020,\"month\":2,\"dayOfMonth\":21,"
+                + "\"hourOfDay\":2,\"minute\":2,\"second\":2},"
+                + "\"fired\":{\"year\":2019,\"month\":4,\"dayOfMonth\":22,"
+                + "\"hourOfDay\":3,\"minute\":3,\"second\":3},"
+                + "\"salary\":100.0}"
+                + "]";
+        JsonReportGenerator jrg = new JsonReportGenerator(store);
+        String json = jrg.generate(em -> true);
+        assertThat(json, is(expectedJson));
+    }
 
     @Test
     public void whenOldGenerated() {
