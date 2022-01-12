@@ -6,29 +6,33 @@ import static org.hamcrest.Matchers.is;
 import org.junit.Test;
 
 import javax.xml.bind.JAXBException;
+import java.time.ZoneOffset;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.TimeZone;
 
 public class ReportEngineTest {
 
     @Test
     public void whenGenerateReportInXML() throws JAXBException {
         MemStore store = new MemStore();
-        Calendar hiredDate = new GregorianCalendar();
-        Calendar firedDate = new GregorianCalendar();
-        hiredDate.set(2020, Calendar.MARCH, 21, 2, 2, 2);
-        firedDate.set(2019, Calendar.MAY, 22, 3, 3, 3);
+        Calendar hiredDate = new GregorianCalendar(2010, Calendar.JULY, 18);
+        Calendar firedDate = new GregorianCalendar(2022, Calendar.JANUARY, 5);
+        hiredDate.setTimeZone(TimeZone.getTimeZone(ZoneOffset.of("+3")));
+        firedDate.setTimeZone(TimeZone.getTimeZone(ZoneOffset.of("+3")));
         Employee worker = new Employee("Ivan", hiredDate, firedDate, 100);
         store.add(worker);
         XMLReportGenerator xml = new XMLReportGenerator(store);
         String exprectedXML = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n"
-                + "<Reports>\n"
-                + "    <employees>"
+                + "<Employees>\n"
+                + "    <employee>\n"
+                + "        <fired>2022-01-05T00:00:00+03:00</fired>\n"
+                + "        <hired>2010-07-18T00:00:00+03:00</hired>\n"
                 + "        <name>Ivan</name>\n"
                 + "        <salary>100.0</salary>\n"
-                + "    </employees>\n"
-                + "</Reports>\n";
-        xml.generate(em -> true);
+                + "    </employee>\n"
+                + "</Employees>\n";
+        assertThat(xml.generate(em -> true), is(exprectedXML));
     }
 
     @Test

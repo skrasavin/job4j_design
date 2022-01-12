@@ -5,10 +5,10 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import java.io.IOException;
 import java.io.StringWriter;
+import java.util.List;
 import java.util.function.Predicate;
 
 public class XMLReportGenerator {
-
     private final Store store;
 
     public XMLReportGenerator(Store store) {
@@ -16,12 +16,13 @@ public class XMLReportGenerator {
     }
 
     public String generate(Predicate<Employee> filter) throws JAXBException {
-        JAXBContext context = JAXBContext.newInstance(MemStore.class);
+        List<Employee> employeeList = store.findBy(filter);
+        JAXBContext context = JAXBContext.newInstance(Employees.class);
         Marshaller marshaller = context.createMarshaller();
         marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
         String xml = "";
         try (StringWriter writer = new StringWriter()) {
-            marshaller.marshal(store, writer);
+            marshaller.marshal(new Employees(employeeList), writer);
             xml = writer.getBuffer().toString();
         } catch (IOException e) {
             e.printStackTrace();
