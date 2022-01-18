@@ -1,5 +1,7 @@
 package ru.job4j.ood.lsp.examples;
 
+import java.util.List;
+
 public class Child extends Parent {
 
 
@@ -25,5 +27,24 @@ public class Child extends Parent {
     @Override
     public void methodCall() {
         String check = this.checkWordsAndAddNew();
+    }
+
+    @Override
+    public String characterLimit(String word) {
+        if (word.length() > 10) {
+            throw new IllegalArgumentException();
+        }
+        return word + " - small wort";
+    }
+
+    @Override
+    public List<String> censure(List<String> words) {
+        List<String> newList = null;
+        for (var w : words) {
+            if (w.length() > 15) {
+                newList.add(w);
+            }
+        }
+        return newList;
     }
 }
