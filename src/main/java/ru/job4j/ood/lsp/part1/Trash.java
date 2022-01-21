@@ -7,11 +7,18 @@ public class Trash implements Storage {
     private ArrayList<Food> storage = new ArrayList<>();
 
     public ArrayList<Food> getStorage() {
-        return storage;
+        return new ArrayList<Food>(storage);
     }
 
     @Override
-    public void addToStorage(Food food) {
+    public boolean accept(Food food) {
+        return percentageCalculation(food) >= 100;
+    }
+
+    @Override
+    public boolean addToStorage(Food food) {
+        boolean value = accept(food);
         storage.add(food);
+        return value;
     }
 }

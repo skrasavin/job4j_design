@@ -7,18 +7,29 @@ public class Shop implements Storage {
     private ArrayList<Food> storage = new ArrayList<>();
 
     public ArrayList<Food> getStorage() {
-        return storage;
+        return new ArrayList<Food>(storage);
     }
 
     @Override
-    public void addToStorage(Food food) {
-        storage.add(food);
+    public boolean accept(Food food) {
+        double percent = percentageCalculation(food);
+        if (percent >= 25 && percent < 75) {
+            return true;
+        } else if (percent >= 75 && percent < 100) {
+            double discount = ((food.getPrice() * food.getDiscount()) / 100);
+            double priceWithDiscount = food.getPrice() - discount;
+            food.setPrice(priceWithDiscount);
+            return true;
+        } else {
+            return false;
+        }
+
     }
 
-    public void makeDiscountAndAddToStorage(Food food) {
-        Double discount = ((food.getPrice() * food.getDiscount()) / 100);
-        double priceWithDiscount = food.getPrice() - discount;
-        food.setPrice(priceWithDiscount);
+    @Override
+    public boolean addToStorage(Food food) {
+        boolean value = accept(food);
         storage.add(food);
+        return value;
     }
 }
