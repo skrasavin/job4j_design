@@ -27,11 +27,7 @@ public class Shop implements Storage {
     }
 
     @Override
-    public boolean addToStorage(Food food) {
-        boolean value = accept(food);
-        if (value) {
+    public void addToStorage(Food food) {
             storage.add(food);
-        }
-        return value;
     }
 }

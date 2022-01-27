@@ -11,7 +11,10 @@ public class ControllQuality {
 
     public void distribution(Food food) {
         for (Storage storage : objStorage) {
-            storage.addToStorage(food);
+            if (storage.accept(food)) {
+                storage.addToStorage(food);
+                break;
+            }
         }
     }
 }

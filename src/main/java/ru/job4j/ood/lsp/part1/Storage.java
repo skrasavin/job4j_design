@@ -8,10 +8,10 @@ import java.util.Calendar;
 import java.util.List;
 
 public interface Storage {
-    public boolean addToStorage(Food food);
+    void addToStorage(Food food);
     boolean accept(Food food);
-    public List<Food> getStorage();
-    public default Double percentageCalculation(Food food) {
+    List<Food> getStorage();
+    default Double percentageCalculation(Food food) {
         Calendar nowDate = Calendar.getInstance();
         LocalDate start = Instant.ofEpochMilli(food.getCreateDate().getTimeInMillis())
                 .atZone(ZoneId.systemDefault()).toLocalDate();
