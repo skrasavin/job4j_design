@@ -1,25 +1,29 @@
 package ru.job4j.ood.lsp.parking;
 
+
 import java.util.ArrayList;
+import java.util.List;
 
 public class ParkingControl {
-    public ArrayList<ParkingPlace> places;
+    private ParkingPlace parkingPlace;
 
-    public ParkingControl(ArrayList<ParkingPlace> places) {
-        this.places = places;
+    public ParkingControl(ParkingPlace parkingPlace) {
+        this.parkingPlace = parkingPlace;
     }
 
-    public void distribution(Car car) {
-        for (var p : places) {
-            p.addToParkingPlace(car);
+    public void distribution(List<Car> cars) {
+        for (var car : cars) {
+            if (parkingPlace.accept(car)) {
+                parkingPlace.addToParkingPlace(car);
+            }
         }
     }
 
     public static void main(String[] args) {
-        ArrayList<ParkingPlace> parkingPlaces = new ArrayList<>();
-        parkingPlaces.add(new PassengerParkingPlace());
-        parkingPlaces.add(new TruckParkingPlace());
-        Car bmw = new PassengerCar("BMW", 0.8);
-        new ParkingControl(parkingPlaces).distribution(bmw);
+        ParkingPlace parkingPlace = new ParkingPlace(50);
+        Car bmw = new PassengerCar("BMW", 1);
+        List<Car> cars = new ArrayList<>();
+        cars.add(bmw);
+        new ParkingControl(parkingPlace).distribution(cars);
     }
 }

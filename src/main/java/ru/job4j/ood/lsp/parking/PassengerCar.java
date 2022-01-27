@@ -2,9 +2,9 @@ package ru.job4j.ood.lsp.parking;
 
 public class PassengerCar implements Car {
     public String name;
-    public double mass;
+    public int mass;
 
-    public PassengerCar(String name, double mass) {
+    public PassengerCar(String name, int mass) {
         this.name = name;
         this.mass = mass;
     }
@@ -13,12 +13,7 @@ public class PassengerCar implements Car {
         return mass;
     }
 
-    public void setMass(double mass) {
+    public void setMass(int mass) {
         this.mass = mass;
-    }
-
-    @Override
-    public void takeParkingSpace() {
-        System.out.println("Припарковаться на маленьком месте");
     }
 }
