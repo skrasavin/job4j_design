@@ -9,7 +9,7 @@ public class Truck implements Car {
         this.mass = mass;
     }
 
-    public double getMass() {
+    public int getMass() {
         return mass;
     }
 

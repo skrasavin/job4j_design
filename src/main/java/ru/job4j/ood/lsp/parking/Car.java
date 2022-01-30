@@ -1,5 +1,5 @@
 package ru.job4j.ood.lsp.parking;
 
 public interface Car {
-    public double getMass();
+    public int getMass();
 }

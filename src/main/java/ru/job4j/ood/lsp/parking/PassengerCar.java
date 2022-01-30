@@ -2,18 +2,13 @@ package ru.job4j.ood.lsp.parking;
 
 public class PassengerCar implements Car {
     public String name;
-    public int mass;
+    public int mass = 1;
 
-    public PassengerCar(String name, int mass) {
+    public PassengerCar(String name) {
         this.name = name;
-        this.mass = mass;
     }
 
-    public double getMass() {
+    public int getMass() {
         return mass;
-    }
-
-    public void setMass(int mass) {
-        this.mass = mass;
     }
 }

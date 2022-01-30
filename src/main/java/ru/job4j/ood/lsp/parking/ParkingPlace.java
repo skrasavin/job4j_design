@@ -20,15 +20,23 @@ public class ParkingPlace {
         return quantity;
     }
 
+    public int getCount() {
+        return count;
+    }
+
     public boolean accept(Car car) {
-        if (car.getMass() > 3) {
+        if (count > quantity) {
+            throw new IllegalArgumentException("No parking spaces");
+        }
+
+        if (car.getMass() < 3) {
             count++;
             return true;
         } else if (car.getMass() >= 3 && car.getMass() <= 7) {
             count += 2;
             return true;
         } else {
-            throw new IllegalArgumentException("More than 5 tons is not provided");
+            throw new IllegalArgumentException("More than 7 tons is not provided");
         }
     }
 
