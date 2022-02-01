@@ -11,9 +11,7 @@ public class ParkingControl {
 
     public void distribution(List<Car> cars) {
         for (var car : cars) {
-            if (parkingPlace.accept(car)) {
-                parkingPlace.addToParkingPlace(car);
-            }
+            parkingPlace.addToParkingPlace(car);
         }
     }
 }

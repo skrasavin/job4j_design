@@ -4,43 +4,43 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ParkingPlace {
-    List<Car> parkingPlace = new ArrayList<>();
-    private int quantity;
-    private int count;
+    List<Car>  smallParkingPlace = new ArrayList<>();
+    List<Car> bigParkingPlace = new ArrayList<>();
+    private int smallParkingCapacity;
+    private int bigParkingCapacity;
 
-    public ParkingPlace(int quantity) {
-        this.quantity = quantity;
+    public ParkingPlace(int smallParkingCapacity, int bigParkingCapacity) {
+        this.smallParkingCapacity = smallParkingCapacity;
+        this.bigParkingCapacity = bigParkingCapacity;
     }
 
-    public List<Car> getParkingPlace() {
-        return parkingPlace;
+    public List<Car> getSmallParkingPlace() {
+        return smallParkingPlace;
+    }
+    public List<Car> getBigParkingPlace() {
+        return bigParkingPlace;
     }
 
-    public int getQuantity() {
-        return quantity;
+    public int smallParkingCapacity() {
+        return smallParkingCapacity;
+    }
+    public int bigParkingCapacity() {
+        return bigParkingCapacity;
     }
 
-    public int getCount() {
-        return count;
-    }
-
-    public boolean accept(Car car) {
-        if (count > quantity) {
-            throw new IllegalArgumentException("No parking spaces");
-        }
-
-        if (car.getMass() < 3) {
-            count++;
-            return true;
-        } else if (car.getMass() >= 3 && car.getMass() <= 7) {
-            count += 2;
-            return true;
-        } else {
-            throw new IllegalArgumentException("More than 7 tons is not provided");
-        }
-    }
 
     public void addToParkingPlace(Car car) {
-        parkingPlace.add(car);
+        if (car.getMass() <= 1 && smallParkingPlace.size() < smallParkingCapacity) {
+            smallParkingPlace.add(car);
+        } else if (car.getMass() > 1 && bigParkingPlace.size() < bigParkingCapacity) {
+            bigParkingPlace.add(car);
+        } else if (car.getMass() > 1 && bigParkingPlace.size() >= bigParkingCapacity) {
+            if (smallParkingPlace.size() + car.getMass() >= smallParkingCapacity) {
+                throw new IllegalArgumentException();
+            }
+            for (int a = 0; a < car.getMass(); a++) {
+                smallParkingPlace.add(car);
+            }
+        }
     }
 }
