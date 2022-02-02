@@ -61,19 +61,4 @@ public class ParkingControlTest {
         assertThat(parkingPlace.getSmallParkingPlace().size(), is(3));
     }
 
-
-    @Test(expected = IllegalArgumentException.class)
-    public void whenParkingIsFull() {
-        ParkingPlace parkingPlace = new ParkingPlace(1, 2);
-        List cars = new ArrayList<>();
-        Car bmw = new PassengerCar("BMW");
-        Car volvo = new Truck("Volvo", 3);
-        Car ram = new Truck("RAM", 3);
-        Car toyota = new Truck("TOYOTA TRUCK", 3);
-        cars.add(bmw);
-        cars.add(volvo);
-        cars.add(ram);
-        cars.add(toyota);
-        new ParkingControl(parkingPlace).distribution(cars);
-    }
 }
