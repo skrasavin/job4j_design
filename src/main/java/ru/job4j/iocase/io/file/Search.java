@@ -13,6 +13,16 @@ public class Search {
             throw new IllegalArgumentException("Root folder is null. Usage java -jar dir.jar ROOT_FOLDER.");
         }
         Path start = Paths.get(args[0]);
+        
+        if (!start.toFile().exists()) {
+            throw new IllegalArgumentException(String.format("Not exist %s", start.toAbsolutePath()));
+        }
+        if (!start.toFile().isDirectory()) {
+            throw new IllegalArgumentException(String.format("Not directory %s", start.toAbsolutePath()));
+        }
+        if (args.length == 1) {
+            throw new IllegalArgumentException("File type is null. You need to add second argument.");
+        }
         search(start, p -> p.toFile().getName().endsWith(args[1])).forEach(System.out::println);
     }
 
