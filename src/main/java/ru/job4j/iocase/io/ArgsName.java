@@ -13,11 +13,11 @@ public class ArgsName {
 
     private void parse(String[] args) {
         for (String st : args) {
-            if (st.split("=").length == 1) {
-                throw new IllegalArgumentException("Empty value");
+            String[] arr = st.split("=");
+            if (arr.length != 2) {
+                throw new IllegalArgumentException("Argument Error");
             }
-            System.out.println(st.split("=")[1]);
-            values.put(st.substring(1).split("=")[0], st.split("=")[1]);
+            values.put(arr[0].substring(1), arr[1]);
         }
     }
 
