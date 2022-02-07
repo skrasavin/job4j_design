@@ -9,7 +9,7 @@ import java.util.function.Predicate;
 
 public class Search {
     public static void main(String[] args) throws IOException {
-        if (args.length == 0) {
+        if (args.length != 2) {
             throw new IllegalArgumentException("Root folder is null. Usage java -jar dir.jar ROOT_FOLDER.");
         }
         Path start = Paths.get(args[0]);
@@ -19,9 +19,6 @@ public class Search {
         }
         if (!start.toFile().isDirectory()) {
             throw new IllegalArgumentException(String.format("Not directory %s", start.toAbsolutePath()));
-        }
-        if (args.length == 1) {
-            throw new IllegalArgumentException("File type is null. You need to add second argument.");
         }
         search(start, p -> p.toFile().getName().endsWith(args[1])).forEach(System.out::println);
     }
